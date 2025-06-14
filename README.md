@@ -37,7 +37,7 @@
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/HJKAI.git
+git clone https://github.com/hjk-maker/HJKAI.git
 cd HJKAI
 pip install -r requirements.txt
 python hjkai.py
