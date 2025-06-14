@@ -1,21 +1,27 @@
-MIT License
 
-Copyright (c) 2025 hjk-maker
+---
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## 📜 `LICENSE` for HJKAI
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+```text
+HJKAI Public License v1.0
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Copyright (c) 2025 HJK-Maker
+
+Permission is hereby granted to any person obtaining a copy of this software and associated documentation files (the “Software”), to use, modify, and distribute the Software for non-commercial, educational, or research purposes, subject to the following conditions:
+
+1. Commercial Use:
+   - For any business, government, or commercial use, the user must obtain a commercial license from the author.
+
+2. Restrictions:
+   - Redistribution of a modified version must credit the original author.
+   - Use of this software for unethical purposes (surveillance, war, political propaganda) is strictly prohibited.
+   - AI models trained using HJKAI must disclose their data source and intended purpose.
+
+3. Revocation Clause:
+   - The author reserves the right to revoke or restrict this license at any time if the terms are violated.
+
+4. Disclaimer:
+   - THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND.
+
+Contact: godmy5154@gmail.com
