@@ -1,439 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HJKAI | Next-Level Styling</title>
-    <style>
-        /* 🌈 COLOR VARIABLES */
-        :root {
-            --neon-pink: #ff2a6d;
-            --neon-blue: #05d9e8;
-            --neon-purple: #d300c5;
-            --neon-green: #00ff88;
-            --cyber-yellow: #f9f002;
-            --dark-space: #0d0221;
-            --deep-space: #1a1b41;
-            --void: #000000;
-            --matrix-green: #00ff41;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HJKAI | Cosmic Intelligence</title>
+  <style>
+    :root {
+      --neon-pink: #ff2a6d;
+      --neon-blue: #05d9e8;
+      --neon-purple: #d300c5;
+      --neon-green: #00ff88;
+      --dark-space: #0d0221;
+      --deep-space: #1a1b41;
+      --matrix-green: #00ff41;
+    }
 
-        /* 🚀 BASE STYLES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Rajdhani', 'Courier New', monospace;
-            background-color: var(--dark-space);
-            color: white;
-            overflow-x: hidden;
-            min-height: 100vh;
-            line-height: 1.6;
-        }
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: var(--dark-space);
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        /* 🌌 BACKGROUND ANIMATION */
-        .cosmic-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 30%, var(--neon-pink), transparent 40%),
-                radial-gradient(circle at 80% 70%, var(--neon-blue), transparent 40%),
-                radial-gradient(circle at 40% 80%, var(--neon-purple), transparent 40%),
-                linear-gradient(var(--dark-space), var(--deep-space));
-            animation: cosmic-pulse 15s infinite alternate;
-        }
+    .cosmic-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 20% 30%, var(--neon-pink), transparent 40%),
+        radial-gradient(circle at 80% 70%, var(--neon-blue), transparent 40%),
+        radial-gradient(circle at 40% 80%, var(--neon-purple), transparent 40%),
+        linear-gradient(var(--dark-space), var(--deep-space));
+      animation: cosmic-pulse 15s infinite alternate;
+    }
 
-        @keyframes cosmic-pulse {
-            0% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
+    @keyframes cosmic-pulse {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
 
-        /* ✨ STARFIELD EFFECT */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+      z-index: 1;
+      position: relative;
+    }
 
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
+    h1 {
+      font-size: 4rem;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: hue-rotate 5s infinite linear;
+    }
 
-        /* 🌀 MAIN CONTAINER */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
+    @keyframes hue-rotate {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
 
-        /* 💫 HEADER STYLES */
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 2rem;
+      margin: 1rem 0.5rem;
+      border-radius: 25px;
+      background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-        h1 {
-            font-size: 5rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(255, 42, 109, 0.3);
-            animation: hue-rotate 8s linear infinite;
-            margin-bottom: 1rem;
-        }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 10px var(--neon-blue);
+    }
 
-        @keyframes hue-rotate {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
+    .card {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      margin: 2rem 0;
+    }
 
-        /* 🔥 NEON CARD STYLES */
-        .card {
-            background: rgba(13, 2, 33, 0.7);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(5, 217, 232, 0.2);
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255, 42, 109, 0.3);
-        }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      background: #1a1b41;
+      color: white;
+      border: 1px solid var(--neon-purple);
+      border-radius: 8px;
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(5, 217, 232, 0.4);
-        }
+    nav {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue), var(--neon-purple));
-            z-index: -1;
-            border-radius: 16px;
-            animation: border-glow 3s linear infinite;
-            opacity: 0.7;
-        }
+    nav a {
+      color: var(--neon-green);
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+    }
 
-        @keyframes border-glow {
-            0% { filter: blur(5px); opacity: 0.7; }
-            50% { filter: blur(7px); opacity: 0.9; }
-            100% { filter: blur(5px); opacity: 0.7; }
-        }
+    nav a:hover {
+      color: var(--neon-pink);
+    }
 
-        /* 🎮 BUTTON STYLES */
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            margin: 1rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            z-index: 1;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
-            color: white;
-            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--neon-blue);
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 10px rgba(5, 217, 232, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(255, 42, 109, 0.7);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-            z-index: -1;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        /* 🌐 GRID LAYOUT */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        /* 📱 RESPONSIVE DESIGN */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-            
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* 💾 TERMINAL STYLE */
-        .terminal {
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            padding: 1.5rem;
-            font-family: 'Courier New', monospace;
-            color: var(--matrix-green);
-            border: 1px solid var(--matrix-green);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .terminal::before {
-            content: 'HJKAI TERMINAL';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: var(--dark-space);
-            padding: 0 10px;
-            color: var(--matrix-green);
-            font-size: 0.8rem;
-        }
-
-        .terminal p::before {
-            content: '> ';
-            color: var(--neon-green);
-        }
-
-        /* 🌀 LOADING ANIMATION */
-        .loader {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100px;
-        }
-
-        .loader-dot {
-            width: 15px;
-            height: 15px;
-            margin: 0 10px;
-            border-radius: 50%;
-            animation: loader-bounce 1.5s infinite ease-in-out;
-        }
-
-        .loader-dot:nth-child(1) {
-            background: var(--neon-pink);
-            animation-delay: 0s;
-        }
-
-        .loader-dot:nth-child(2) {
-            background: var(--neon-blue);
-            animation-delay: 0.2s;
-        }
-
-        .loader-dot:nth-child(3) {
-            background: var(--neon-purple);
-            animation-delay: 0.4s;
-        }
-
-        @keyframes loader-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* 🏆 SPECIAL EFFECTS */
-        .glitch {
-            position: relative;
-        }
-
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-        }
-
-        .glitch::before {
-            color: var(--neon-blue);
-            z-index: -1;
-            animation: glitch-effect 3s infinite;
-        }
-
-        .glitch::after {
-            color: var(--neon-pink);
-            z-index: -2;
-            animation: glitch-effect 2s infinite reverse;
-        }
-
-        @keyframes glitch-effect {
-            0% { transform: translate(0); }
-            20% { transform: translate(-3px, 3px); }
-            40% { transform: translate(-3px, -3px); }
-            60% { transform: translate(3px, 3px); }
-            80% { transform: translate(3px, -3px); }
-            100% { transform: translate(0); }
-        }
-
-        /* 🌟 EXTRA FLAIR */
-        .shine {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shine::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255, 255, 255, 0) 45%,
-                rgba(255, 255, 255, 0.8) 50%,
-                rgba(255, 255, 255, 0) 55%
-            );
-            transform: rotate(30deg);
-            animation: shine-effect 3s infinite;
-        }
-
-        @keyframes shine-effect {
-            0% { left: -50%; top: -50%; }
-            100% { left: 150%; top: 150%; }
-        }
-    </style>
+    .terminal {
+      font-family: 'Courier New', monospace;
+      color: var(--matrix-green);
+      background-color: #000;
+      padding: 1rem;
+      margin-top: 2rem;
+      border-left: 4px solid var(--matrix-green);
+    }
+  </style>
 </head>
 <body>
-    <!-- 🌌 Background Elements -->
-    <div class="cosmic-bg"></div>
-    <div class="stars" id="stars"></div>
+  <div class="cosmic-bg"></div>
+  <div class="container">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Feedback</a>
+    </nav>
 
-    <!-- 🚀 Main Content -->
-    <div class="container">
-        <header>
-            <h1 class="glitch" data-text="HJKAI">HJKAI</h1>
-            <p>Next-generation digital experience in creating AI</p>
-        </header>
+    <header>
+      <h1>HJKAI</h1>
+      <p>The Cosmic AI Power by HJK Maker</p>
+      <a href="https://github.com/hjk-maker/hjkai-" class="btn">Get Started</a>
+      <a href="https://github.com/hjk-maker/hjkai-/blob/main/README.md" class="btn">Learn More</a>
+    </header>
 
-        <div class="card shine">
-            <h2>🚀 About HJKAI</h2>
-            <p>Welcome to the most advanced digital platform powered by cutting-edge technology ILT and futuristic design by HJK-maker.</p>
-            <div class="loader">
-                <div class="loader-dot"></div>
-                <div class="loader-dot"></div>
-                <div class="loader-dot"></div>
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <h3>✨ Features</h3>
-                <ul>
-                    <li>internet learning</li>
-                    <li>full gui</li>
-                    <li>free and open on github</li>
-                    <li>Cyberpunk aesthetics</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>⚡ Performance</h3>
-                <ul>
-                    <li>Lightspeed learning and traning</li>
-                    <li>Zero work</li>
-                    <li>99.9% uptime</li>
-                    <li>Blockchain-ready</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="terminal">
-            <p>System initialized</p>
-            <p>Loading ai...</p>
-            <p>loading for user input</p>
-            <p>Ready for user input</p>
-        </div>
-
-        <div style="text-align: center; margin: 3rem 0;">
-            <button class="https://github.com/hjk-maker/hjkai-",style="text-color=green">Get Started</button>
-            <button class="https://github.com/hjk-maker/hjkai-/blob/main/README.md">Learn More </button>
-        </div>
+    <div class="card">
+      <h2>🚀 Cosmic Highlights</h2>
+      <ul>
+        <li>Zero-work AI learning with ILT</li>
+        <li>Web3 Ready</li>
+        <li>Custom GUI Framework</li>
+        <li>Works Offline</li>
+      </ul>
     </div>
 
-    <script>
-        // Create starfield
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 200; i++) {
-            const star = document.createElement('div');
-            star.classList.add('star');
-            star.style.width = `${Math.random() * 3}px`;
-            star.style.height = star.style.width;
-            star.style.left = `${Math.random() * 100}%`;
-            star.style.top = `${Math.random() * 100}%`;
-            star.style.opacity = Math.random();
-            star.style.setProperty('--duration', `${2 + Math.random() * 3}s`);
-            starsContainer.appendChild(star);
-        }
+    <div class="terminal">
+      > Initializing HJKAI v1.0...<br>
+      > Loading ILT Stanford Modules...<br>
+      > Ready for intelligence training...
+    </div>
 
-        // Add interactive effects
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-    </script>
+    <div class="card">
+      <h2>💬 Feedback Form</h2>
+      <p>Want to share a thought or bug? Submit below!</p>
+      <form action="https://formsubmit.co/godmy5154@gmail.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="5" placeholder="Write your feedback..." required></textarea>
+        <button type="submit" class="btn">Send Feedback</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
