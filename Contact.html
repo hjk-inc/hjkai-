@@ -3,35 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Feedback | HJKAI</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Contact | HJKAI</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #0d0221;
+      color: white;
+      padding: 2rem;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #05d9e8;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 1rem;
+      margin: 1rem 0;
+      background: #111;
+      color: white;
+      border: 1px solid #05d9e8;
+      border-radius: 5px;
+    }
+    button {
+      background: #05d9e8;
+      color: black;
+      border: none;
+      padding: 1rem 2rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #status {
+      margin-top: 1rem;
+      color: var(--neon-green);
+    }
+  </style>
 </head>
 <body>
-  <div class="cosmic-bg"></div>
-  <div class="container">
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Feedback</a>
-    </nav>
+  <h1>Contact Us</h1>
+  <form id="contactForm">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+    <div id="status"></div>
+  </form>
 
-    <header>
-      <h1>Contact & Feedback</h1>
-      <p>We'd love to hear your thoughts!</p>
-    </header>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const status = document.getElementById('status');
+      status.innerText = 'Sending...';
 
-    <div class="card">
-      <form action="https://formsubmit.co/godmy5154@gmail.com" method="POST">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" rows="5" placeholder="Your message or suggestion..." required></textarea>
-        <button type="submit" class="btn">Send Feedback</button>
-      </form>
-    </div>
+      // Simulate sending (e.g., via Formspree or logging to console)
+      const formData = new FormData(this);
+      const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message')
+      };
 
-    <a href="index.html" class="btn">← Back to Home</a>
-  </div>
+      // Simulated AJAX
+      setTimeout(() => {
+        console.log('Message Sent:', data);
+        status.innerText = '✅ Message sent successfully!';
+        this.reset();
+      }, 1000);
+    });
+  </script>
 </body>
-</html>
+  </html>
