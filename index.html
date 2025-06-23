@@ -4,15 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HJKAI | Cosmic Intelligence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --neon-pink: #ff2a6d;
       --neon-blue: #05d9e8;
       --neon-purple: #d300c5;
       --neon-green: #00ff88;
+      --matrix-green: #00ff41;
       --dark-space: #0d0221;
       --deep-space: #1a1b41;
-      --matrix-green: #00ff41;
+      --starfield-size: 3px;
+      --particle-count: 150;
     }
 
     * {
@@ -27,6 +30,7 @@
       color: white;
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
     }
 
     .cosmic-bg {
@@ -35,7 +39,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -2;
+      z-index: -3;
       background:
         radial-gradient(circle at 20% 30%, var(--neon-pink), transparent 40%),
         radial-gradient(circle at 80% 70%, var(--neon-blue), transparent 40%),
@@ -49,25 +53,140 @@
       100% { opacity: 1; }
     }
 
+    /* Starfield Background */
+    .starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+      animation: twinkle var(--duration, 4s) infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    /* Particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background-color: var(--neon-blue);
+      border-radius: 50%;
+      animation: float var(--duration, 10s) infinite linear;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(calc(var(--y) * 1vh)) translateX(calc(var(--x) * 1vw));
+        opacity: 0;
+      }
+    }
+
     .container {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: auto;
       padding: 2rem;
       z-index: 1;
       position: relative;
     }
 
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--neon-green);
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--neon-pink);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Header */
     header {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
+      padding: 3rem 0;
+      position: relative;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
     }
 
     h1 {
-      font-size: 4rem;
+      font-size: 4.5rem;
+      margin-bottom: 1rem;
       background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue), var(--neon-purple));
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
-      animation: hue-rotate 5s infinite linear;
+      animation: hue-rotate 5s infinite linear, glow 2s infinite alternate;
+      text-shadow: 0 0 10px rgba(255, 42, 109, 0.5);
     }
 
     @keyframes hue-rotate {
@@ -75,97 +194,577 @@
       100% { filter: hue-rotate(360deg); }
     }
 
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px var(--neon-pink); }
+      50% { text-shadow: 0 0 20px var(--neon-blue), 0 0 30px var(--neon-purple); }
+      100% { text-shadow: 0 0 15px var(--neon-purple), 0 0 25px var(--neon-pink); }
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      color: var(--neon-green);
+      margin-bottom: 2rem;
+      animation: fadeIn 2s ease;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
     .btn {
-      display: inline-block;
-      padding: 0.7rem 2rem;
-      margin: 1rem 0.5rem;
-      border-radius: 25px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.9rem 2.5rem;
+      border-radius: 50px;
       background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
       color: white;
       border: none;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 10px var(--neon-blue);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 5px 20px var(--neon-blue);
+    }
+
+    .btn:hover::after {
+      opacity: 1;
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn i {
+      margin-right: 0.7rem;
+      font-size: 1.2rem;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--neon-blue);
+      color: var(--neon-blue);
+    }
+
+    /* Cards */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
 
     .card {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 2rem;
+      background: rgba(10, 5, 30, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem 2rem;
       border-radius: 15px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-      margin: 2rem 0;
+      box-shadow: 0 0 20px rgba(5, 217, 232, 0.2);
+      margin: 0;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(5, 217, 232, 0.1);
+      position: relative;
+      overflow: hidden;
     }
 
-    form input, form textarea {
-      width: 100%;
-      padding: 0.8rem;
-      margin: 0.5rem 0;
-      background: #1a1b41;
-      color: white;
-      border: 1px solid var(--neon-purple);
-      border-radius: 8px;
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px var(--neon-purple);
+      border-color: rgba(211, 0, 197, 0.3);
     }
 
-    nav {
-      text-align: center;
-      margin-bottom: 2rem;
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue), var(--neon-purple));
+      z-index: -1;
+      border-radius: 17px;
+      animation: borderRotate 5s linear infinite;
     }
 
-    nav a {
+    @keyframes borderRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--neon-blue);
+      display: flex;
+      align-items: center;
+    }
+
+    .card h2 i {
+      margin-right: 0.8rem;
       color: var(--neon-green);
-      text-decoration: none;
-      margin: 0 1rem;
-      font-weight: bold;
     }
 
-    nav a:hover {
-      color: var(--neon-pink);
+    .card ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    .card li {
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 2rem;
+      line-height: 1.6;
+    }
+
+    .card li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--neon-green);
+      font-size: 1.2rem;
+    }
+
+    /* Terminal */
+    .terminal-container {
+      margin: 3rem 0;
+      perspective: 1000px;
     }
 
     .terminal {
       font-family: 'Courier New', monospace;
       color: var(--matrix-green);
-      background-color: #000;
-      padding: 1rem;
-      margin-top: 2rem;
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 2rem;
+      border-radius: 10px;
       border-left: 4px solid var(--matrix-green);
+      box-shadow: 0 0 25px rgba(0, 255, 65, 0.3);
+      position: relative;
+      overflow: hidden;
+      transform: rotateX(5deg);
+    }
+
+    .terminal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(transparent 50%, rgba(0, 255, 65, 0.05) 50%);
+      background-size: 100% 4px;
+      z-index: 0;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 0.5rem;
+      margin-right: 1rem;
+    }
+
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background-color: #ff5f56; }
+    .dot-yellow { background-color: #ffbd2e; }
+    .dot-green { background-color: #27c93f; }
+
+    .terminal-title {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .terminal-content {
+      position: relative;
+      z-index: 1;
+      line-height: 1.8;
+    }
+
+    .terminal-line {
+      display: flex;
+      margin-bottom: 0.5rem;
+    }
+
+    .terminal-prompt {
+      color: var(--neon-purple);
+      margin-right: 0.8rem;
+    }
+
+    .terminal-text {
+      flex: 1;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 18px;
+      background-color: var(--matrix-green);
+      margin-left: 0.3rem;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .stat-card {
+      background: rgba(26, 27, 65, 0.6);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(5, 217, 232, 0.1);
+      border: 1px solid rgba(5, 217, 232, 0.1);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--neon-green);
+      font-size: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      padding: 2rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--neon-blue);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--neon-pink);
+    }
+
+    .copyright {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+      }
+      
+      .btn-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .stats {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <div class="cosmic-bg"></div>
+  <div class="starfield" id="starfield"></div>
+  <div class="particles" id="particles"></div>
+  
   <div class="container">
     <nav>
-      
+      <div class="logo">
+        <h3>HJK<span style="color: var(--neon-pink);">AI</span></h3>
+      </div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#technology">Technology</a>
+        <a href="#terminal">Terminal</a>
+        <a href="#stats">Stats</a>
+      </div>
     </nav>
 
     <header>
-      <h1>HJKAI</h1>
-      <p>The Cosmic AI Power by HJK Maker</p>
-      <a href="https://github.com/hjk-maker/hjkai-" class="btn">Get Started</a>
-      <a href="https://github.com/hjk-maker/hjkai-/blob/main/README.md" class="btn">Learn More</a>
+      <div class="header-content">
+        <h1>HJKAI</h1>
+        <p class="subtitle">The Cosmic Intelligence Platform</p>
+        <div class="btn-container">
+          <a href="https://github.com/hjk-maker/hjkai-" class="btn">
+            <i class="fas fa-rocket"></i>
+            <span>Get Started</span>
+          </a>
+          <a href="https://github.com/hjk-maker/hjkai-/blob/main/README.md" class="btn btn-outline">
+            <i class="fas fa-book"></i>
+            <span>Documentation</span>
+          </a>
+        </div>
+      </div>
     </header>
 
-    <div class="card">
-      <h2>🚀 Cosmic Highlights</h2>
-      <ul>
-        <li>Zero-work AI learning with ILT</li>
-        <li>Web3 Ready</li>
-        <li>Custom GUI Framework</li>
-        <li>Works Offline</li>
-      </ul>
-    </div>
+    <section id="features">
+      <div class="features-grid">
+        <div class="card">
+          <h2><i class="fas fa-brain"></i> Cosmic Intelligence</h2>
+          <ul>
+            <li>Zero-work AI learning with ILT</li>
+            <li>Adaptive neural architecture</li>
+            <li>Quantum-inspired algorithms</li>
+            <li>Self-optimizing knowledge base</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <h2><i class="fas fa-cube"></i> HJK Infinity Core</h2>
+          <ul>
+            <li>Multi-dimensional processing</li>
+            <li>Entanglement-based computing</li>
+            <li>Cosmic energy harvesting</li>
+            <li>Non-linear time processing</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <h2><i class="fas fa-infinity"></i> Eternal Framework</h2>
+          <ul>
+            <li>Web3 Ready</li>
+            <li>Custom GUI Framework</li>
+            <li>Works Offline</li>
+            <li>Multi-dimensional storage</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <div class="terminal">
-      > Initializing HJKAI v1.0...<br>
-      > Loading ILT Stanford Modules...<br>
-      > Ready for intelligence training...
-    </div>
+    <section id="stats">
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-value">99.9%</div>
+          <div class="stat-label">Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">10x</div>
+          <div class="stat-label">Faster Processing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">24/7</div>
+          <div class="stat-label">Uptime</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">∞</div>
+          <div class="stat-label">Scalability</div>
+        </div>
+      </div>
+    </section>
 
-  
+    <section id="terminal">
+      <div class="terminal-container">
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <div class="terminal-dot dot-red"></div>
+              <div class="terminal-dot dot-yellow"></div>
+              <div class="terminal-dot dot-green"></div>
+            </div>
+            <div class="terminal-title">HJKAI Terminal v1.0</div>
+          </div>
+          <div class="terminal-content">
+            <div class="terminal-line">
+              <div class="terminal-prompt">> </div>
+              <div class="terminal-text">Initializing HJKAI cosmic intelligence...</div>
+            </div>
+            <div class="terminal-line">
+              <div class="terminal-prompt">> </div>
+              <div class="terminal-text">Loading ILT Stanford modules... <span style="color: var(--neon-green);">DONE</span></div>
+            </div>
+            <div class="terminal-line">
+              <div class="terminal-prompt">> </div>
+              <div class="terminal-text">Establishing quantum entanglement...</div>
+            </div>
+            <div class="terminal-line">
+              <div class="terminal-prompt">> </div>
+              <div class="terminal-text">Syncing with HJK Infinity Core... <span style="color: var(--neon-green);">SUCCESS</span></div>
+            </div>
+            <div class="terminal-line">
+              <div class="terminal-prompt">> </div>
+              <div class="terminal-text">Ready for intelligence training<span class="cursor"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-links">
+        <a href="https://github.com/hjk-maker"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#"><i class="fas fa-book"></i> Documentation</a>
+        <a href="#"><i class="fas fa-users"></i> Community</a>
+        <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+      </div>
+      <div class="copyright">
+        © 2023 HJKAI | Cosmic Intelligence Platform. All dimensions reserved.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Create starfield
+    const starfield = document.getElementById('starfield');
+    const starsCount = 200;
+    
+    for (let i = 0; i < starsCount; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      
+      // Random position
+      const left = Math.random() * 100;
+      const top = Math.random() * 100;
+      
+      // Random size
+      const size = Math.random() * 3;
+      
+      // Random animation duration
+      const duration = 2 + Math.random() * 5;
+      
+      star.style.left = `${left}%`;
+      star.style.top = `${top}%`;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.setProperty('--duration', `${duration}s`);
+      star.style.animationDelay = `${Math.random() * 5}s`;
+      
+      starfield.appendChild(star);
+    }
+    
+    // Create floating particles
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 80;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      // Random position
+      const left = Math.random() * 100;
+      const top = Math.random() * 100;
+      
+      // Random movement
+      const x = (Math.random() - 0.5) * 30;
+      const y = (Math.random() - 0.5) * 30;
+      
+      // Random size
+      const size = 1 + Math.random() * 3;
+      
+      // Random animation duration
+      const duration = 5 + Math.random() * 10;
+      
+      particle.style.left = `${left}%`;
+      particle.style.top = `${top}%`;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.setProperty('--x', x);
+      particle.style.setProperty('--y', y);
+      particle.style.setProperty('--duration', `${duration}s`);
+      particle.style.animationDelay = `${Math.random() * 5}s`;
+      
+      // Random color
+      const colors = ['var(--neon-pink)', 'var(--neon-blue)', 'var(--neon-purple)', 'var(--neon-green)'];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.backgroundColor = randomColor;
+      
+      particlesContainer.appendChild(particle);
+    }
+    
+    // Terminal typing effect
+    const cursor = document.querySelector('.cursor');
+    const terminalText = document.querySelector('.terminal-text');
+    const text = "Ready for intelligence training";
+    let index = 0;
+    
+    function type() {
+      if (index < text.length) {
+        terminalText.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, 100);
+      }
+    }
+    
+    // Start typing after a delay
+    setTimeout(type, 2000);
+  </script>
 </body>
-          </html>
+  </html>
